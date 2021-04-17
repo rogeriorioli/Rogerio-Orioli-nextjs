@@ -13,6 +13,7 @@ import axios from 'axios';
 import ReactMarkdown from 'react-markdown';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 
+import fetch from 'node-fetch'
 
 interface PostProps {
   cover_image: string;
@@ -20,42 +21,38 @@ interface PostProps {
   body_markdown: string;
   description: string;
   social_image: string
+  id: string
 }
 
-const Post = ({ id }) => {
+
+
+
+const Post = ({ cover_image, title, body_markdown, description, social_image, id }: PostProps) => {
+
   const route = useRouter()
-  const [post, setPost] = useState<PostProps>()
 
-  useEffect(() => {
-    axios.get(`https://dev.to/api/articles/${id}`)
-      .then(success => {
-        const { data } = success
-        setPost(data)
-      })
 
-  }, [])
-  console.log(post)
+
   return (
     <>
-
       <Head>
 
-        <title>Rogerio Orioli | {post?.title}</title>
-        <meta name="title" content={`Rogerio Orioli | ${post?.title}`} />
-        <meta name="description" content={post?.description} />
+        <title>Rogerio Orioli | {title}</title>
+        <meta name="title" content={`Rogerio Orioli | ${title}`} />
+        <meta name="description" content={description} />
 
 
         <meta property="og:type" content="article" />
-        <meta property="og:url" content={`https://rogeriorioli.dev.br/articles/${id}`} />
-        <meta property="og:title" content={`Rogerio Orioli | ${post?.title}`} />
-        <meta property="og:description" content={post?.description} />
-        <meta property="og:image" content={post?.social_image} />
+        <meta property="og:url" content={`https://rogeriorioli.dev.br/articles/${id}}`} />
+        <meta property="og:title" content={`Rogerio Orioli | ${title}`} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={social_image} />
 
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content={`Rogerio Orioli | ${post?.title}`} />
-        <meta property="twitter:title" content={`Rogerio Orioli | ${post?.title}`} />
-        <meta property="twitter:description" content={post?.description} />
-        <meta property="twitter:image" content={post?.social_image} />
+        <meta property="twitter:url" content={`Rogerio Orioli | ${title}`} />
+        <meta property="twitter:title" content={`Rogerio Orioli | ${title}`} />
+        <meta property="twitter:description" content={description} />
+        <meta property="twitter:image" content={social_image} />
 
 
       </Head>
@@ -63,21 +60,40 @@ const Post = ({ id }) => {
         <PageContainer>
           <div className="container">
             <article className="post">
-              <h1>{post?.title}</h1>
-              <img className="cover_image" src={post?.cover_image} alt={post?.title} />
+              <h1>{title}</h1>
+              <img className="cover_image" src={cover_image} alt={title} />
               <ReactMarkdown >
-                {post?.body_markdown}
+                {body_markdown}
               </ReactMarkdown>
             </article>
           </div>
         </PageContainer>
       </Layouts>
     </>
-  );
+  )
 }
+
+export async function getStaticPaths() {
+
+  const { data: posts } = await axios.get('https://dev.to/api/articles?username=rogeriorioli')
+  const paths = posts.map(post => `/articles/${post.id}`)
+  return { paths, fallback: false }
+}
+
+export const getStaticProps = async ({ params }) => {
+  const { data: post } = await axios.get<PostProps>(`https://dev.to/api/articles/${params.id}`)
+  return {
+    props: {
+      cover_image: post.cover_image,
+      title: post.title,
+      body_markdown: post.body_markdown,
+      description: post.description,
+      social_image: post.social_image,
+      id: post.id
+    }
+  }
+};
 
 export default Post;
 
-Post.getInitialProps = ({ query: { id } }) => {
-  return { id };
-};
+
