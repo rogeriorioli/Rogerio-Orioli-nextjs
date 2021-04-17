@@ -14,7 +14,7 @@ const CardPortifolio: React.FC = () => {
         api.get('repos').then(success => {
             setRepos(success.data);
         })
-        // setOrdder(repos.sort((a, b) => Date(a.created_at) - Date(b.created_at)))
+
     }, [])
 
     const seeMore = () => {

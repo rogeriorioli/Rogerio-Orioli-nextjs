@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-
 const PageContainer = styled.main`
     background-color : var(--background);
     display : flex;
@@ -28,6 +27,47 @@ const PageContainer = styled.main`
         padding : 0 4rem;
         overflow: hidden;
         justify-content : center;
+    }
+    .post {
+    .cover_image {
+        width : 100%;
+        margin : 30px 0;
+    }
+        max-width : 1200px;
+        margin :30px auto; 
+        h1 {
+            font-size : 3rem;
+              margin : 20px 0;
+        }
+        p{
+            font-size :1.8rem;
+            font-weight : 400;
+            width : 100%;
+            line-height : 2;
+            strong {
+            font-weight : bold;
+            font-size :1.8rem;
+            }
+            img {
+            margin : 20px auto;
+            display :block;
+    
+            }
+        }
+        h2, h3 {
+            font-size : 2.5rem;
+            margin : 20px 0;
+        }
+        pre {
+            tab-size : 2;
+            background : black;
+            color : white;
+            padding : 20px;
+            margin : 20px 0;
+            font-size : 3rem;
+            border-left : 6px solid var(--purple)
+        }
+      
     }
 
 `;
