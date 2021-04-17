@@ -1,19 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import Seo from '../../Components/Seo'
-import SocialIcons from '../../Components/SocialIcons';
+import React from 'react'
+
 import PageContainer from '../style';
-import { FiCodepen, FiGithub, FiLinkedin, FiPhone, FiDownload, FiTwitter } from 'react-icons/fi'
-import CardPortifolio from '../../Components/CardPortifolio';
-import Title from '../../Components/Title';
-import Hero from '../../Components/Hero';
+
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import Layouts from '../../Layouts';
 import axios from 'axios';
 import ReactMarkdown from 'react-markdown';
-import SyntaxHighlighter from 'react-syntax-highlighter';
 
-import fetch from 'node-fetch'
 
 interface PostProps {
   cover_image: string;
@@ -28,8 +21,6 @@ interface PostProps {
 
 
 const Post = ({ cover_image, title, body_markdown, description, social_image, id }: PostProps) => {
-
-  const route = useRouter()
 
 
 
@@ -90,7 +81,8 @@ export const getStaticProps = async ({ params }) => {
       description: post.description,
       social_image: post.social_image,
       id: post.id
-    }
+    },
+    revalidate: 1
   }
 };
 
