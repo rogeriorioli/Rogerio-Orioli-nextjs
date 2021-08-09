@@ -58,5 +58,11 @@ const GlobalStyles = createGlobalStyle`
         0%   {opacity : 0};
         100%  {opacity : 1};
     }
+    .post {
+        img {
+            max-width: 100%;
+            margin: auto;
+        }
+    }
 `
 export default GlobalStyles

@@ -71,13 +71,8 @@ const Home: React.FC = () => {
 
                   {
                     name: 'WhatsApp',
-                    link: 'https://api.whatsapp.com/send?phone=5511989885408&text=Oi%20Rogerio',
+                    link: 'https://api.whatsapp.com/send?phone=5548991865408&text=Oi%20Rogerio',
                     icon: <FiPhone size={25} />
-                  },
-                  {
-                    name: 'Download profile',
-                    link: 'https://docs.google.com/document/d/1APFhxIqI9mvf1UlefMoync4-dUWSjRY6N_S86vk3AVU/edit?usp=sharing',
-                    icon: <FiDownload size={25} />
                   }
                 ]}
 

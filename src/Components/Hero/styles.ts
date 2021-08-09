@@ -15,10 +15,11 @@ export const HeroContainer = styled.div`
             position: absolute;
             width: 18%;
             height: 75px;
-            background-color: var(--purple);
+                border-top: 30px solid var(--purple);
+                border-left: 30px solid var(--purple);
             mix-blend-mode: overlay;
-            left: -6px;
-            top: 27px;
+            left: -10px;
+            top: 20px;
             z-index: 8;
             transition : all 0.3s;
         }
@@ -27,10 +28,12 @@ export const HeroContainer = styled.div`
                 position: absolute;
                 width: 18%;
                 height: 75px;
-                background-color: var(--purple);
+                background-color: transparent;
                 mix-blend-mode: overlay;
-                right: -6px;
-                bottom: 27px;
+                border-bottom: 30px solid var(--purple);
+                border-right: 30px solid var(--purple);
+                right: -10px;
+                bottom: 20px;
                 z-index: 8;
                 transition : all 0.3s;
           }
@@ -39,7 +42,7 @@ export const HeroContainer = styled.div`
             position : relative;
             display : block;
             z-index: 1;
-            mix-blend-mode: overlay;
+            mix-blend-mode: lighten;
             opacity: .8;
             transition : all 0.5s;
             &:hover {

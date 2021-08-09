@@ -9,7 +9,7 @@ import SocialIcons from '../Components/SocialIcons';
 import Title from '../Components/Title';
 import Layouts from '../Layouts';
 import PageContainer from './style';
-
+import Container from '../Components/Card/styles';
 
 // import { Container } from './styles';
 
@@ -31,6 +31,7 @@ const articles: React.FC = () => {
           <Title contenTitle=" Blog Posts from Dev.to" >
             <ImNewspaper size={28} />
           </Title>
+      <Container>
           {posts.map(post =>
             <Card
               key={post.id}
@@ -45,6 +46,7 @@ const articles: React.FC = () => {
             />
 
           )}
+          </Container>
         </div>
       </Layouts>
     </>

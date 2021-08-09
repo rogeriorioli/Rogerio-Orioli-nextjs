@@ -19,8 +19,7 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ key, link, description, title, label, userAvatar, username, alt, slug }) => {
   return (
-    <Container>
-      <div className="card-repos">
+
         <div className="card" key={key}>
           <Link prefetch href={link}  >
             <a title={alt} >
@@ -42,9 +41,6 @@ const Card: React.FC<CardProps> = ({ key, link, description, title, label, userA
             </Link>
           </div>
         </div>
-
-      </div>
-    </Container>
   );
 }
 
