@@ -4,7 +4,7 @@ export const HeaderContainer = styled.div`
         width : 100%;
         background: var(--background);
         display: flex;
-        padding : 1.6rem 0;
+        padding : 1.2rem 0;
         height : 80px;
         border-bottom : 1px solid var(--current-line);
         align-items: center;
@@ -35,25 +35,22 @@ export const HeaderContainer = styled.div`
                     }
                 }
             }
-            nav {
-                ul {
-                    li {
-                        display : inline-block;
-                        margin : 0 0  0 20px;
-                        font-size :3rem;
-                        font-weight : bold;
-                        a {
-                         text-decoration : none;
-                        }
-                        &.active{
-                            border-bottom: 3px solid  var(--purple);
-                            a {
-                                
-                            }
-                        }
-                    }
-                }
+            button {
+                background : none;
+                 border : 1px solid  var(--purple) ;
+                 width : 50px;
+                 height : 50px;
+                 color : white;
+                 display : flex; 
+                 align-items : center; 
+                 justify-content : center;
+                 font-size : 1.8rem;
+                display : none;
+                position: relative; 
+                z-index : 99999999999;
+                 @media (max-width : 1444px) {
+                     display : block;
+        }
             }
         }
-
 `;

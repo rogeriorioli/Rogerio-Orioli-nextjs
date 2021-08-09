@@ -52,7 +52,7 @@ const GlobalStyles = createGlobalStyle`
 
     .container {
         width : 100%;
-        padding : 0 4rem;
+        padding : 0 2rem;
     }
     @keyframes pageFade {
         0%   {opacity : 0};

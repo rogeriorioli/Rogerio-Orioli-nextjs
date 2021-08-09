@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '../Components/CardPortifolio/Header';
+import Header from '../Components/Header';
 
 const Layouts: React.FC = ({ children }) => {
   return (
