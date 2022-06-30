@@ -60,7 +60,7 @@ const Home: React.FC = () => {
                   },
                   {
                     name: 'Twitter',
-                    link: 'https://twitter.com/RogerioOrioli',
+                    link: 'https://twitter.com/rogeriorioli',
                     icon: <FiTwitter size={25} />
                   },
                   {
@@ -71,7 +71,7 @@ const Home: React.FC = () => {
 
                   {
                     name: 'WhatsApp',
-                    link: 'https://api.whatsapp.com/send?phone=5548991865408&text=Oi%20Rogerio',
+                    link: 'https://api.whatsapp.com/send?phone=5548992035400&text=Oi%20Rogerio venho através do seu site',
                     icon: <FiPhone size={25} />
                   }
                 ]}
