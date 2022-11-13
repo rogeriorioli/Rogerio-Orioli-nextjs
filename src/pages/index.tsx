@@ -71,7 +71,7 @@ const Home: React.FC = () => {
 
                   {
                     name: 'WhatsApp',
-                    link: 'https://api.whatsapp.com/send?phone=5548992035400&text=Oi%20Rogerio venho através do seu site',
+                    link: 'https://api.whatsapp.com/send?phone=5511972194218&text=Oi%20Rogerio venho através do seu site',
                     icon: <FiPhone size={25} />
                   }
                 ]}
