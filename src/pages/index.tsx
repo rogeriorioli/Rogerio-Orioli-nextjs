@@ -23,7 +23,7 @@ const Home: React.FC = () => {
         />
 
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://rogeriorioli.dev.br" />
+        <meta property="og:url" content="https://rogeriorioli.vercel.app/" />
         <meta property="og:title" content="Rogerio Orioli | Web Developer" />
         <meta
           property="og:description"
@@ -32,7 +32,10 @@ const Home: React.FC = () => {
         <meta property="og:image" content="/static/images/ogimage.png" />
 
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://rogeriorioli.dev.br" />
+        <meta
+          property="twitter:url"
+          content="https://rogeriorioli.vercel.app/"
+        />
         <meta
           property="twitter:title"
           content="Rogerio Orioli | Web Developer"
