@@ -1,6 +1,15 @@
 import styled from 'styled-components';
 
 const Container = styled.div`
+    display: flex;
+       @media(max-width : 700px) {
+              flex-direction: column;
+        }
+          @media(max-width : 1080px) {
+              flex-direction: row;
+              display: inline-block;
+        }
+
    .card-repos {
         display : block;
         }
@@ -9,18 +18,18 @@ const Container = styled.div`
         border : 1px solid var(--current-line);
         margin : 2rem 2rem  2rem 0;
         padding : 2rem;
-        width : 18%;
         border-radius : 1.6rem;
         animation-name : pageFade;
         animation-duration: 1s;
         min-height : 240px;
-        display : inline-block;
+        width: 350px;
         vertical-align : top;
         transition: all 0.2s;
         position : relative;
         @media(max-width : 700px) {
             width: 100%;
         }
+
         h2 {
               display : block;
                 width : 100%;
@@ -46,8 +55,10 @@ const Container = styled.div`
             border-radius : 1rem;
             color: var(--background);
             width : auto;
-            margin : 1rem 0;
+            margin : 2px 5px;
             font-weight : 600;
+            display: inline-block;
+            
         }
         .card-footer {
             position : absolute;
@@ -71,20 +82,6 @@ const Container = styled.div`
             background: var(--selection);
              color : var(--foreground);
              border-color : var(--purple);
-        }
-        @media(max-width : 1280px) {
-            width: 23.3%;
-        }
-        @media(max-width : 1208px) {
-            width: 31.4%;
-
-        }
-        @media(max-width : 1080px) {
-            width: 47%;
-
-        }
-        @media(max-width : 700px) {
-            width: 100%;
         }
     }
     button, .button {

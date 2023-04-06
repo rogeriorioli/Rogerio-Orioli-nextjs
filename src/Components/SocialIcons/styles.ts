@@ -15,5 +15,11 @@ export const SocialContainer = styled.div`
                 stroke : var(--purple);
             }
         }
+        .fill {
+        
+           svg {
+                fill : var(--purple);
+            }  
+        }
     }
 `;

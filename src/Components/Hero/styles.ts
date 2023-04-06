@@ -38,7 +38,6 @@ export const HeroContainer = styled.div`
                 transition : all 0.3s;
           }
         img {
-            width : 100%;
             position : relative;
             display : block;
             z-index: 1;

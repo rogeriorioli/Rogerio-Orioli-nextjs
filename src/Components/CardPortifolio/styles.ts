@@ -46,8 +46,10 @@ export const CardContainer = styled.div`
             border-radius : 1rem;
             color: var(--background);
             width : auto;
-            margin : 1rem 0;
+            margin : 1rem ;
             font-weight : 600;
+            display: inline-block;
+
         }
         .card-footer {
             position : absolute;
