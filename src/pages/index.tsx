@@ -83,11 +83,11 @@ const Home: React.FC = () => {
                     icon: <FiCodepen size={25} />,
                   },
 
-                  {
-                    name: "WhatsApp",
-                    link: "https://api.whatsapp.com/send?phone=5511972194218&text=Oi%20Rogerio venho através do seu site",
-                    icon: <FiPhone size={25} />,
-                  },
+                  // {
+                  //   name: "WhatsApp",
+                  //   link: "https://api.whatsapp.com/send?phone=5511972194218&text=Oi%20Rogerio venho através do seu site",
+                  //   icon: <FiPhone size={25} />,
+                  // },
                 ]}
               />
             </div>
