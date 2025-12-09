@@ -51,10 +51,10 @@ const Hero: React.FC = () => {
         </div>
 
         <div className="mt-16 flex justify-center space-x-6">
-          <a href="#" className="text-slate-500 hover:text-white transition-colors transform hover:scale-110">
+          <a href="https://github.com/rogeriorioli" className="text-slate-500 hover:text-white transition-colors transform hover:scale-110">
             <Github size={24} />
           </a>
-          <a href="#" className="text-slate-500 hover:text-white transition-colors transform hover:scale-110">
+          <a href="https://www.linkedin.com/in/rogeriorioli/" className="text-slate-500 hover:text-white transition-colors transform hover:scale-110">
             <Linkedin size={24} />
           </a>
         </div>
