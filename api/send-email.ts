@@ -40,7 +40,7 @@ export default async function handler(req, res) {
 
     // 2. Send Notification Email
     const { data, error } = await resend.emails.send({
-      from: 'Portfolio Contact <onboarding@resend.dev>',
+      from: 'Contato Site Carlos <emails@mails.convertesites.com.br>',
       to: ['crorioli81@gmail.com'],
       subject: `Portfólio: Nova mensagem de ${name}`,
       html: `
