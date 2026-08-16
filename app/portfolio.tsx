@@ -210,15 +210,15 @@ export function Portfolio() {
                   <span className="h-2 w-2 rounded-full bg-[#d7a400] shadow-[0_0_0_5px_rgba(215,164,0,0.15)]" />
                   Aberto a projetos selecionados
                 </div>
-                <ul className="max-w-md space-y-4 text-sm leading-6 text-black/65 md:text-base">
+                <ul className="max-w-md space-y-4 text-base leading-7 text-black/65">
                   <li><strong className="font-semibold text-black">Experiência:</strong> mais de 10 anos desenvolvendo e sustentando sistemas de grande escala, com grande volume de dados.</li>
                   <li><strong className="font-semibold text-black">Construção:</strong> aplicações robustas e rápidas com React, Next.js e Node.js, do MVP à operação.</li>
                   <li><strong className="font-semibold text-black">Automação:</strong> IA generativa e agentes de software aplicados a fluxos operacionais e problemas complexos.</li>
                 </ul>
                 <div className="mt-8 flex flex-wrap items-center gap-3 text-sm font-medium">
-                  <a href="https://www.linkedin.com/in/rogeriorioli/" target="_blank" rel="noreferrer" aria-label="LinkedIn de Carlos Rogério Orioli" className="inline-flex items-center gap-2 rounded-full border border-black/15 px-3 py-2 transition-colors hover:border-black hover:bg-black hover:text-white"><BriefcaseBusiness className="h-4 w-4" />LinkedIn</a>
-                  <a href="https://github.com/rogeriorioli" target="_blank" rel="noreferrer" aria-label="GitHub de Carlos Rogério Orioli" className="inline-flex items-center gap-2 rounded-full border border-black/15 px-3 py-2 transition-colors hover:border-black hover:bg-black hover:text-white"><Code2 className="h-4 w-4" />GitHub</a>
-                  <a href="https://dev.to/rogeriorioli" target="_blank" rel="noreferrer" aria-label="DEV.to de Carlos Rogério Orioli" className="inline-flex items-center gap-2 rounded-full border border-black/15 px-3 py-2 transition-colors hover:border-black hover:bg-black hover:text-white"><Rss className="h-4 w-4" />DEV.to</a>
+                  <a href="https://www.linkedin.com/in/rogeriorioli/" target="_blank" rel="noreferrer" aria-label="LinkedIn de Carlos Rogério Orioli" className="inline-flex min-h-11 items-center gap-2 rounded-full border border-black/15 px-3 py-2 transition-colors hover:border-black hover:bg-black hover:text-white"><BriefcaseBusiness className="h-4 w-4" />LinkedIn</a>
+                  <a href="https://github.com/rogeriorioli" target="_blank" rel="noreferrer" aria-label="GitHub de Carlos Rogério Orioli" className="inline-flex min-h-11 items-center gap-2 rounded-full border border-black/15 px-3 py-2 transition-colors hover:border-black hover:bg-black hover:text-white"><Code2 className="h-4 w-4" />GitHub</a>
+                  <a href="https://dev.to/rogeriorioli" target="_blank" rel="noreferrer" aria-label="DEV.to de Carlos Rogério Orioli" className="inline-flex min-h-11 items-center gap-2 rounded-full border border-black/15 px-3 py-2 transition-colors hover:border-black hover:bg-black hover:text-white"><Rss className="h-4 w-4" />DEV.to</a>
                 </div>
                 <a href="#experiencia" className="mt-8 inline-flex items-center gap-2 border-b border-black pb-2 text-sm font-semibold transition-colors hover:border-[#c99300] hover:text-[#c99300]">
                   Conheça minha experiência <ArrowDownRight className="h-4 w-4" />
@@ -275,13 +275,13 @@ export function Portfolio() {
                   <div className="mb-3 text-xs font-semibold uppercase tracking-[0.15em] text-[#b47e00]">{experience.period}</div>
                   <div className="rounded-[1.5rem] border border-black/10 bg-[#e9e3d8]/60 p-6 transition-colors hover:border-black/25 md:p-8">
                     <div className="flex flex-col justify-between gap-3 md:flex-row md:items-start"><div><h3 className="text-2xl font-semibold tracking-[-0.04em] md:text-3xl">{experience.role}</h3><p className="mt-1 font-medium text-black/65">{experience.company}</p></div><div className="text-xs leading-5 text-black/50 md:text-right">{experience.contract}<br />{experience.location}</div></div>
-                    <p className="mt-6 max-w-2xl text-sm leading-6 text-black/65">{experience.description}</p>
-                    <ul className="mt-5 grid gap-2 text-sm leading-6 text-black/60 md:grid-cols-2">{experience.highlights.map((highlight) => <li key={highlight} className="flex gap-2"><span className="mt-3 h-1 w-1 shrink-0 rounded-full bg-[#d39b00]" />{highlight}</li>)}</ul>
+                    <p className="mt-6 max-w-2xl text-base leading-7 text-black/65 md:text-sm md:leading-6">{experience.description}</p>
+                    <ul className="mt-5 grid gap-2 text-base leading-7 text-black/60 md:grid-cols-2 md:text-sm md:leading-6">{experience.highlights.map((highlight) => <li key={highlight} className="flex gap-2"><span className="mt-3 h-1 w-1 shrink-0 rounded-full bg-[#d39b00]" />{highlight}</li>)}</ul>
                   </div>
                 </motion.article>
               ))}
               <div className="relative pl-8 md:pl-12">
-                <button type="button" onClick={() => setShowFullExperience((open) => !open)} className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-black/15 px-4 py-2 text-sm font-semibold transition-colors hover:border-black hover:bg-black hover:text-white" aria-expanded={showFullExperience} aria-controls="earlier-experience">
+                <button type="button" onClick={() => setShowFullExperience((open) => !open)} className="inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-full border border-black/15 px-4 py-2 text-sm font-semibold transition-colors hover:border-black hover:bg-black hover:text-white" aria-expanded={showFullExperience} aria-controls="earlier-experience">
                   {showFullExperience ? "Ocultar experiências anteriores" : `Ver trajetória completa (${earlierExperiences.length} experiências)`}
                   <ChevronDown className={`h-4 w-4 transition-transform ${showFullExperience ? "rotate-180" : ""}`} />
                 </button>
@@ -297,7 +297,7 @@ export function Portfolio() {
                         </div>
                         <div className="text-xs uppercase tracking-[0.12em] text-[#b47e00] md:text-right">{experience.period}<br /><span className="normal-case tracking-normal text-black/50">{experience.location}</span></div>
                       </div>
-                      <p className="mt-3 max-w-2xl text-sm leading-6 text-black/60">{experience.description}</p>
+                      <p className="mt-3 max-w-2xl text-base leading-7 text-black/60 md:text-sm md:leading-6">{experience.description}</p>
                     </article>
                   ))}
                 </div>
