@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowDownRight, ArrowUpRight, BriefcaseBusiness, Code2, Heart, Mail, Menu, Rss, X } from "lucide-react";
+import { ArrowDownRight, ArrowUpRight, BriefcaseBusiness, ChevronDown, Code2, Heart, Mail, Menu, Rss, X } from "lucide-react";
 import { motion, MotionConfig, useReducedMotion, useScroll, useTransform } from "framer-motion";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Experience = {
   period: string;
@@ -139,8 +139,12 @@ const navLinks = [
   { label: "Experiência", href: "#experiencia" },
 ];
 
+const recentExperiences = experiences.slice(0, 6);
+const earlierExperiences = experiences.slice(6);
+
 export function Portfolio() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [showFullExperience, setShowFullExperience] = useState(false);
   const heroRef = useRef<HTMLElement | null>(null);
   const prefersReducedMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({
@@ -151,6 +155,17 @@ export function Portfolio() {
   const circleY = useTransform(scrollYProgress, [0, 1], [0, prefersReducedMotion ? 0 : -28]);
   const contentY = useTransform(scrollYProgress, [0, 1], [0, prefersReducedMotion ? 0 : -24]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.8], [1, prefersReducedMotion ? 1 : 0.2]);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [menuOpen]);
 
   return (
     <MotionConfig reducedMotion="user">
@@ -171,19 +186,19 @@ export function Portfolio() {
           <a href="mailto:crorioli81@gmail.com" className="hidden items-center gap-2 rounded-full border border-black/15 px-4 py-2 text-sm font-medium transition-colors hover:border-black hover:bg-black hover:text-white md:flex">
             Vamos conversar <ArrowUpRight className="h-4 w-4" />
           </a>
-          <button type="button" onClick={() => setMenuOpen((open) => !open)} className="rounded-full border border-black/15 p-2 md:hidden" aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}>
+          <button type="button" onClick={() => setMenuOpen((open) => !open)} className="cursor-pointer rounded-full border border-black/15 p-2 md:hidden" aria-label={menuOpen ? "Fechar menu" : "Abrir menu"} aria-expanded={menuOpen} aria-controls="mobile-navigation">
             {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </header>
 
         {menuOpen && (
-          <nav className="relative z-30 mx-6 flex flex-col gap-4 border-y border-black/10 py-5 md:hidden" aria-label="Navegação mobile">
+          <nav id="mobile-navigation" className="relative z-30 mx-6 flex flex-col gap-4 border-y border-black/10 py-5 md:hidden" aria-label="Navegação mobile">
             {navLinks.map((link) => (
               <a key={link.href} href={link.href} onClick={() => setMenuOpen(false)} className="text-lg font-medium">
                 {link.label}
               </a>
             ))}
-            <a href="mailto:crorioli81@gmail.com" className="text-lg font-medium text-[#bd8500]">Contato →</a>
+            <a href="mailto:crorioli81@gmail.com" className="inline-flex items-center gap-2 text-lg font-medium text-[#bd8500]">Entrar em contato <ArrowUpRight className="h-4 w-4" /></a>
           </nav>
         )}
 
@@ -193,13 +208,12 @@ export function Portfolio() {
               <motion.div style={{ y: contentY, opacity: contentOpacity }}>
                 <div className="mb-8 flex items-center gap-3 text-sm font-medium text-black/55">
                   <span className="h-2 w-2 rounded-full bg-[#d7a400] shadow-[0_0_0_5px_rgba(215,164,0,0.15)]" />
-                  disponível para projetos selecionados
+                  Aberto a projetos selecionados
                 </div>
                 <ul className="max-w-md space-y-4 text-sm leading-6 text-black/65 md:text-base">
-                  <li><strong className="font-semibold text-black">Experiência prática:</strong> mais de 10 anos desenvolvendo e sustentando sistemas de grande escala, com alta volumetria de dados.</li>
-                  <li><strong className="font-semibold text-black">Stack técnico:</strong> atuação full-stack com React, Next.js e Node.js para construir aplicações robustas, escaláveis e performáticas.</li>
-                  <li><strong className="font-semibold text-black">IA e automação:</strong> integração de IA generativa e desenvolvimento de sistemas agênticos para otimizar fluxos operacionais.</li>
-                  <li><strong className="font-semibold text-black">Perfil executor:</strong> foco em qualidade de código, performance, segurança e entrega rápida de soluções para problemas complexos.</li>
+                  <li><strong className="font-semibold text-black">Experiência:</strong> mais de 10 anos desenvolvendo e sustentando sistemas de grande escala, com grande volume de dados.</li>
+                  <li><strong className="font-semibold text-black">Construção:</strong> aplicações robustas e rápidas com React, Next.js e Node.js, do MVP à operação.</li>
+                  <li><strong className="font-semibold text-black">Automação:</strong> IA generativa e agentes de software aplicados a fluxos operacionais e problemas complexos.</li>
                 </ul>
                 <div className="mt-8 flex flex-wrap items-center gap-3 text-sm font-medium">
                   <a href="https://www.linkedin.com/in/rogeriorioli/" target="_blank" rel="noreferrer" aria-label="LinkedIn de Carlos Rogério Orioli" className="inline-flex items-center gap-2 rounded-full border border-black/15 px-3 py-2 transition-colors hover:border-black hover:bg-black hover:text-white"><BriefcaseBusiness className="h-4 w-4" />LinkedIn</a>
@@ -207,7 +221,7 @@ export function Portfolio() {
                   <a href="https://dev.to/rogeriorioli" target="_blank" rel="noreferrer" aria-label="DEV.to de Carlos Rogério Orioli" className="inline-flex items-center gap-2 rounded-full border border-black/15 px-3 py-2 transition-colors hover:border-black hover:bg-black hover:text-white"><Rss className="h-4 w-4" />DEV.to</a>
                 </div>
                 <a href="#experiencia" className="mt-8 inline-flex items-center gap-2 border-b border-black pb-2 text-sm font-semibold transition-colors hover:border-[#c99300] hover:text-[#c99300]">
-                  Ver experiência <ArrowDownRight className="h-4 w-4" />
+                  Conheça minha experiência <ArrowDownRight className="h-4 w-4" />
                 </a>
               </motion.div>
             </motion.div>
@@ -244,17 +258,18 @@ export function Portfolio() {
             <motion.div initial={{ opacity: 0, x: 24 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="order-2 lg:order-3 lg:col-span-2 lg:-mt-24 lg:ml-auto lg:w-[53%]">
               <motion.div style={{ y: contentY, opacity: contentOpacity }}>
                 <h1 className="text-[clamp(4.2rem,12vw,10.5rem)] font-bold leading-[0.78] tracking-[-0.09em] text-[#171717]">Carlos<br /><span className="ml-[14%] text-[#d39b00]">Rogério</span><br />Orioli<span className="text-[#d39b00]">.</span></h1>
+                <p className="mt-8 max-w-md text-lg font-semibold tracking-[-0.02em] text-black/75 md:text-xl">Desenvolvedor Full Stack · Automação com IA</p>
               </motion.div>
             </motion.div>
           </section>
 
-          <section id="experiencia" className="border-t border-black/15 py-24 md:py-32">
+          <section id="experiencia" className="scroll-mt-8 border-t border-black/15 py-24 md:py-32">
             <div className="mb-16 grid gap-8 md:grid-cols-[0.7fr_1.3fr]">
-              <div className="flex items-start gap-3 text-sm font-semibold uppercase tracking-[0.2em] text-black/50"><span>02</span><span className="mt-2 h-px w-10 bg-black/30" />Experiência</div>
+              <div className="flex items-start gap-3 text-sm font-semibold uppercase tracking-[0.2em] text-black/50"><span className="mt-2 h-px w-10 bg-black/30" />Experiência</div>
               <div><h2 className="text-5xl font-bold leading-[0.88] tracking-[-0.07em] md:text-8xl">Uma década<br /><span className="text-[#d39b00]">em movimento.</span></h2><p className="mt-8 max-w-xl text-base leading-7 text-black/60">Da publicidade ao e-commerce, de produtos mobile à automação com IA: uma trajetória construída entre código, produto e impacto real.</p></div>
             </div>
             <div className="relative ml-2 border-l border-black/15 md:ml-[29%]">
-              {experiences.map((experience, index) => (
+              {recentExperiences.map((experience, index) => (
                 <motion.article key={`${experience.company}-${experience.role}`} initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.45, delay: Math.min(index * 0.03, 0.2) }} className="relative pb-12 pl-8 last:pb-0 md:pl-12">
                   <span className="absolute -left-[5px] top-1 h-2.5 w-2.5 rounded-full bg-[#d39b00] ring-4 ring-[#f4f1eb]" />
                   <div className="mb-3 text-xs font-semibold uppercase tracking-[0.15em] text-[#b47e00]">{experience.period}</div>
@@ -265,13 +280,35 @@ export function Portfolio() {
                   </div>
                 </motion.article>
               ))}
+              <div className="relative pl-8 md:pl-12">
+                <button type="button" onClick={() => setShowFullExperience((open) => !open)} className="inline-flex cursor-pointer items-center gap-2 rounded-full border border-black/15 px-4 py-2 text-sm font-semibold transition-colors hover:border-black hover:bg-black hover:text-white" aria-expanded={showFullExperience} aria-controls="earlier-experience">
+                  {showFullExperience ? "Ocultar experiências anteriores" : `Ver trajetória completa (${earlierExperiences.length} experiências)`}
+                  <ChevronDown className={`h-4 w-4 transition-transform ${showFullExperience ? "rotate-180" : ""}`} />
+                </button>
+              </div>
+              {showFullExperience && (
+                <div id="earlier-experience" className="mt-8 space-y-1 pl-8 md:pl-12">
+                  {earlierExperiences.map((experience) => (
+                    <article key={`${experience.company}-${experience.role}`} className="border-t border-black/10 py-5 last:border-b">
+                      <div className="flex flex-col gap-2 md:flex-row md:items-baseline md:justify-between md:gap-6">
+                        <div>
+                          <h3 className="text-lg font-semibold tracking-[-0.02em]">{experience.role}</h3>
+                          <p className="text-sm text-black/60">{experience.company}</p>
+                        </div>
+                        <div className="text-xs uppercase tracking-[0.12em] text-[#b47e00] md:text-right">{experience.period}<br /><span className="normal-case tracking-normal text-black/50">{experience.location}</span></div>
+                      </div>
+                      <p className="mt-3 max-w-2xl text-sm leading-6 text-black/60">{experience.description}</p>
+                    </article>
+                  ))}
+                </div>
+              )}
             </div>
           </section>
 
-          <section className="grid gap-10 border-t border-black/15 py-24 md:grid-cols-[0.7fr_1.3fr] md:py-32"><div className="flex items-start gap-3 text-sm font-semibold uppercase tracking-[0.2em] text-black/50"><span>03</span><span className="mt-2 h-px w-10 bg-black/30" />Contato</div><div><h2 className="max-w-3xl text-5xl font-bold leading-[0.9] tracking-[-0.07em] md:text-8xl">Vamos criar<br /><span className="text-[#d39b00]">algo bom.</span></h2><div className="mt-10 flex flex-col items-start gap-4"><a href="mailto:crorioli81@gmail.com" className="inline-flex items-center gap-3 border-b-2 border-black pb-2 text-lg font-semibold transition-colors hover:border-[#c99300] hover:text-[#c99300]">crorioli81@gmail.com <Mail className="h-5 w-5" /></a><a href="https://wa.me/5548991775899" target="_blank" rel="noreferrer" aria-label="Conversar com Carlos Rogério Orioli pelo WhatsApp" className="inline-flex items-center gap-3 border-b-2 border-black pb-2 text-lg font-semibold transition-colors hover:border-[#c99300] hover:text-[#c99300]">WhatsApp +55 48 99177-5899 <span aria-hidden="true">↗</span></a></div></div></section>
+          <section className="grid gap-10 border-t border-black/15 py-24 md:grid-cols-[0.7fr_1.3fr] md:py-32"><div className="flex items-start gap-3 text-sm font-semibold uppercase tracking-[0.2em] text-black/50"><span className="mt-2 h-px w-10 bg-black/30" />Contato</div><div><h2 className="max-w-3xl text-5xl font-bold leading-[0.9] tracking-[-0.07em] md:text-8xl">Vamos conversar<br /><span className="text-[#d39b00]">sobre seu projeto.</span></h2><div className="mt-10 flex flex-col items-start gap-4"><a href="mailto:crorioli81@gmail.com" className="inline-flex items-center gap-3 border-b-2 border-black pb-2 text-lg font-semibold transition-colors hover:border-[#c99300] hover:text-[#c99300]">Enviar e-mail <span className="font-normal text-black/55">crorioli81@gmail.com</span> <Mail className="h-5 w-5" /></a><a href="https://wa.me/5548991775899" target="_blank" rel="noreferrer" aria-label="Conversar com Carlos Rogério Orioli pelo WhatsApp" className="inline-flex items-center gap-3 border-b-2 border-black pb-2 text-lg font-semibold transition-colors hover:border-[#c99300] hover:text-[#c99300]">Conversar pelo WhatsApp <span className="font-normal text-black/55">+55 48 99177-5899</span> <ArrowUpRight className="h-5 w-5" /></a></div></div></section>
         </main>
 
-        <footer className="relative z-10 border-t border-black/15"><div className="mx-auto flex max-w-7xl flex-col gap-5 px-6 py-8 text-sm text-black/55 md:flex-row md:items-center md:justify-between md:px-10"><span>© {new Date().getFullYear()} Carlos Rogério Orioli</span><div className="flex items-center gap-5"><a href="https://github.com/rogeriorioli" target="_blank" rel="noreferrer" className="transition-colors hover:text-black"><Code2 className="h-5 w-5" /></a><a href="https://www.linkedin.com/in/rogeriorioli/" target="_blank" rel="noreferrer" className="transition-colors hover:text-black"><BriefcaseBusiness className="h-5 w-5" /></a><a href="https://dev.to/rogeriorioli" target="_blank" rel="noreferrer" className="transition-colors hover:text-black"><Rss className="h-5 w-5" /></a></div><span className="inline-flex items-center gap-1.5">Feito com <Heart className="h-3.5 w-3.5 fill-[#d39b00] text-[#d39b00]" aria-label="amor" /> em Floripa</span></div></footer>
+        <footer className="relative z-10 border-t border-black/15"><div className="mx-auto flex max-w-7xl flex-col gap-5 px-6 py-8 text-sm text-black/55 md:flex-row md:items-center md:justify-between md:px-10"><span>© {new Date().getFullYear()} Carlos Rogério Orioli</span><div className="flex items-center gap-5"><a href="https://github.com/rogeriorioli" target="_blank" rel="noreferrer" aria-label="GitHub de Carlos Rogério Orioli" className="rounded-sm transition-colors hover:text-black"><Code2 className="h-5 w-5" /></a><a href="https://www.linkedin.com/in/rogeriorioli/" target="_blank" rel="noreferrer" aria-label="LinkedIn de Carlos Rogério Orioli" className="rounded-sm transition-colors hover:text-black"><BriefcaseBusiness className="h-5 w-5" /></a><a href="https://dev.to/rogeriorioli" target="_blank" rel="noreferrer" aria-label="DEV.to de Carlos Rogério Orioli" className="rounded-sm transition-colors hover:text-black"><Rss className="h-5 w-5" /></a></div><span className="inline-flex items-center gap-1.5">Feito com <Heart className="h-3.5 w-3.5 fill-[#d39b00] text-[#d39b00]" aria-label="amor" /> em Floripa</span></div></footer>
       </div>
     </MotionConfig>
   );
